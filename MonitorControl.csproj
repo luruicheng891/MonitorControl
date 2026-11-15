@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- WinExe：托盘后台应用，无控制台窗口 -->
+    <OutputType>WinExe</OutputType>
+    <!-- 目标框架：.NET 8 -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <!-- 启用 WinForms（托盘 + 弹出滑块） -->
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>MonitorControl</AssemblyName>
+    <RootNamespace>MonitorControl</RootNamespace>
+    <Version>1.0.0</Version>
+    <!-- 应用图标（exe + 托盘共用） -->
+    <ApplicationIcon>assets\app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\app.ico" />
+    <!-- Setup 子目录是独立的安装器项目，不参与主程序编译 -->
+    <Compile Remove="Setup\**" />
+    <None Remove="Setup\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 唯一的 NuGet 依赖：WMI 亮度控制（笔记本内屏）用，微软官方包 -->
+    <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
